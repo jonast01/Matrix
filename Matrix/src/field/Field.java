@@ -17,7 +17,7 @@ package field;
  * @author henry
  *
  */
-interface Field<E> {
+public interface Field<E> {
 	
 	/**
 	 * a neutral element for addition
@@ -64,7 +64,7 @@ interface Field<E> {
 	E getInverseElementMult();
 	
 	/**
-	 * the calculation addition
+	 * the arithmetic operation addition
 	 * 
 	 * precondition: both elements are in the SAME field
 	 * 
@@ -78,7 +78,7 @@ interface Field<E> {
 	E add(E element);
 	
 	/**
-	 * the calculation subtraction
+	 * the arithmetic operation subtraction
 	 * 
 	 * precondition: both elements are in the SAME field
 	 * 
@@ -92,7 +92,7 @@ interface Field<E> {
 	E substract(E element);
 	
 	/**
-	 * the calculation multiplication
+	 * the arithmetic operation multiplication
 	 * 
 	 * precondition: both elements are in the SAME field
 	 * 
@@ -106,7 +106,7 @@ interface Field<E> {
 	E multipliesWith(E element);
 	
 	/**
-	 * the calculation division
+	 * the arithmetic operation division
 	 * 
 	 * precondition: both elements are in the SAME field
 	 * 
@@ -118,4 +118,6 @@ interface Field<E> {
 	 * @return the result of division
 	 */
 	E dividedBy(E element);
+
+	boolean isSameAs(E element);
 }

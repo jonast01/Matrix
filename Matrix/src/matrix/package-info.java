@@ -5,4 +5,4 @@
  * @author henry
  *
  */
-package calculation;
+package matrix;

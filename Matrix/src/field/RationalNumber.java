@@ -13,28 +13,6 @@ package field;
 public final class RationalNumber implements Field<RationalNumber> {
 	
 	/**
-	 * a neutral element for addition
-	 * 
-	 * an element e which applies to
-	 * the following:
-	 * x + e = x
-	 * 
-	 * here [ 0 / 1 ]
-	 */
-	private static final RationalNumber neutralElementAdd = new RationalNumber(0, 1);
-	
-	/**
-	 * a neutral element for multiplication
-	 * 
-	 * an element n which applies to
-	 * the following:
-	 * x * n = x
-	 * 
-	 * here [ 1 / 1 ]
-	 */
-	private static final RationalNumber neutralElementMult = new RationalNumber(1, 1);
-	
-	/**
 	 * the numerator of a rational number
 	 * 
 	 * an upper part of a rational number
@@ -81,6 +59,10 @@ public final class RationalNumber implements Field<RationalNumber> {
 		}
 	}
 
+	public final double toDouble() {
+		return (double)this.numerator / (double)this.denominator;
+	}
+	
 	/**
 	 * returns the number as a String
 	 * 
@@ -89,9 +71,22 @@ public final class RationalNumber implements Field<RationalNumber> {
 	 */
 	@Override
 	public final String toString() {
-		return "[ " + this.numerator + " / " + this.denominator + " ]";
+		return this.numerator + "/" + this.denominator;
 	}
 	
+	@Override
+	public final boolean isSameAs(RationalNumber element) {
+		if(element == null) {
+			return false;
+		}
+		
+		if((this.numerator == element.numerator)
+				&&(this.denominator == element.denominator)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * get the neutral element for addition
@@ -104,7 +99,7 @@ public final class RationalNumber implements Field<RationalNumber> {
 	 */
 	@Override
 	public RationalNumber getNeutralElementAdd() {
-		return RationalNumber.neutralElementAdd;
+		return new RationalNumber(0, 1);
 	}
 	
 	/**
@@ -118,7 +113,7 @@ public final class RationalNumber implements Field<RationalNumber> {
 	 */
 	@Override
 	public RationalNumber getNeutralElementMult() {
-		return RationalNumber.neutralElementMult;
+		return new RationalNumber(1, 1);
 	}
 	
 	/**
@@ -132,7 +127,7 @@ public final class RationalNumber implements Field<RationalNumber> {
 	 */
 	@Override
 	public RationalNumber getInverseElementAdd() {
-		return new RationalNumber(0-this.numerator, this.denominator);
+		return lowestTerms(new RationalNumber((0 - this.numerator), this.denominator));
 	}
 	
 	/**
@@ -146,7 +141,7 @@ public final class RationalNumber implements Field<RationalNumber> {
 	 */
 	@Override
 	public RationalNumber getInverseElementMult() {
-		return new RationalNumber(this.denominator, this.numerator);
+		return lowestTerms(new RationalNumber(this.denominator, this.numerator));
 	}
 	
 	/**
@@ -166,7 +161,7 @@ public final class RationalNumber implements Field<RationalNumber> {
 		int newDenominator = this.denominator * element.denominator;
 		int newNumerator = this.numerator * element.denominator
 				+ element .numerator * this.denominator;
-		return new RationalNumber(newNumerator, newDenominator);
+		return lowestTerms(new RationalNumber(newNumerator, newDenominator));
 	}
 
 	/**
@@ -202,12 +197,48 @@ public final class RationalNumber implements Field<RationalNumber> {
 	public RationalNumber multipliesWith(RationalNumber element) {
 		int newDenominator = this.denominator * element.denominator;
 		int newNumerator = this.numerator * element.numerator;
-		return new RationalNumber(newNumerator, newDenominator);
+		return lowestTerms(new RationalNumber(newNumerator, newDenominator));
 	}
 
+	/**
+	 * the calculation division
+	 * 
+	 * precondition: both elements are rational
+	 * 
+	 * postcondition: the result is 
+	 * [ (1st numerator * 2nd denominator) / 
+	 * (1st denominator * 2nd numerator) ]
+	 * 
+	 * @param the (2nd) element to be divided
+	 * @return the result of division as a rational number
+	 */
 	@Override
 	public RationalNumber dividedBy(RationalNumber element) {
 		return this.multipliesWith(element.getInverseElementMult());
 	}
+	
+	private final RationalNumber lowestTerms(RationalNumber rationalNumber) {
+		int thisDenominator = rationalNumber.denominator;
+		int thisNumerator = rationalNumber.numerator;
+		int gcd = greatestCommonDivisor(thisDenominator, thisNumerator);
+		int newDenominator = thisDenominator / gcd;
+		int newNumerator =thisNumerator / gcd;
+		return new RationalNumber(newNumerator, newDenominator);
+	}
 
+	private final int greatestCommonDivisor(int greaterNumber, int lessNumber) {
+		if(greaterNumber < lessNumber) {
+			exchangeNumbers(greaterNumber, lessNumber);
+		}
+		if(lessNumber == 0) {
+			return(greaterNumber);
+		} else
+			return greatestCommonDivisor(lessNumber, greaterNumber % lessNumber);
+	}
+	
+	private final void exchangeNumbers(int number1, int number2) {
+		int cache = number1;
+		number1 = number2;
+		number2 = cache;
+	}
 }	
