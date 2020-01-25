@@ -1,0 +1,22 @@
+Matrix ChangeLog:
+
+01/25/2020
+changed the structure of gaussian elimination and put some useful methods such as 
+exchanging rows into basic package named "reforming" under matrix
+added functions:
+-matrix
+  -reforming
+    -rows interaction
+    -row transformation
+coming features: finite field with 2 elements, completing docs of all classes
+
+
+01/24/2020
+start of the project, building everything from scratch
+including fuctions:
+-field
+  -rational numbers
+-number test using fields
+-matrix
+-matrix test using fields and matrix
+-gaussian elimination

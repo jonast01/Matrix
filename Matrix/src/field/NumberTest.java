@@ -4,7 +4,7 @@
 package field;
 
 /**
- * @author henry
+ * @author Pinku_Neko
  *
  */
 final class NumberTest {
@@ -12,10 +12,10 @@ final class NumberTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		// TODO Auto-generated method stub
-		RationalNumber aRNumber = new RationalNumber(1, 1);
-		RationalNumber anotherRNumber = new RationalNumber(1, 1);
+		final RationalNumber aRNumber = new RationalNumber(-1, 1);
+		final RationalNumber anotherRNumber = new RationalNumber(1, -1);
 		System.out.printf("Value: %s \n", aRNumber.toString());
 		System.out.printf("neutral element add: %s \n", aRNumber.getNeutralElementAdd().toString());
 		System.out.printf("neutral element mult: %s \n", aRNumber.getNeutralElementMult().toString());
@@ -31,6 +31,7 @@ final class NumberTest {
 		} else {
 			System.out.println("They are different");
 		}
+		System.out.printf("%d",(-60) % (-17));
 	}
 
 }

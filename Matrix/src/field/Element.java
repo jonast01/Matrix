@@ -9,7 +9,7 @@ package field;
  * 
  * this class is somehow redundant...
  * 
- * @author henry
+ * @author Pinku_Neko
  *
  */
 abstract class Element {
