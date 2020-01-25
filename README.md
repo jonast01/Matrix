@@ -1,5 +1,5 @@
 # Matrix
-matrix with given field and corresponded calculation
+matrix with given field and corresponding calculation
 it can be used to construct a matrix using specified fields
 Why i am doing this: 
   1. I don't know how to use gaussian elimination with finite fields on wolfram alpha
