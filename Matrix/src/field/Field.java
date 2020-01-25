@@ -14,7 +14,7 @@ package field;
  * and all the calculations including:
  * addition, subtraction, multiplication, division
  * 
- * @author henry
+ * @author Pinku_Neko
  *
  */
 public interface Field<E> {
@@ -119,5 +119,25 @@ public interface Field<E> {
 	 */
 	E dividedBy(E element);
 
+	/**
+	 * check if two elements are same
+	 * 
+	 * verify if this element has exact the same value as
+	 * the given element
+	 * 
+	 * @param element to be compared to this element
+	 * @return true if they have the same value, 
+	 * otherwise false
+	 */
 	boolean isSameAs(E element);
+	
+	/**
+	 * check if the element is zero
+	 * 
+	 * verify if this element has exact the same value as
+	 * the neutral element for addition has
+	 * 
+	 * @return true if it is zero, otherwise false
+	 */
+	boolean isZero();
 }

@@ -1,8 +1,9 @@
+
 /**
+ * This package contains fundamentals of 
+ * a matrix and related Operations. 
  * 
- */
-/**
- * @author henry
+ * @author Pinku_Neko
  *
  */
 package matrix;
